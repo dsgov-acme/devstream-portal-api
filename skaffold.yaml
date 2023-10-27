@@ -6,10 +6,10 @@ profiles:
   - name: local
     build:
       googleCloudBuild:
-        projectId: devstream-services
+        projectId: devstream-shared-services-4179
         gradleImage: gradle:7.6-jdk11-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-portal-api
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
             type: gradle
             project: service
@@ -23,8 +23,8 @@ profiles:
             chartPath: helm/portal-api
             # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
             setValueTemplates:
-              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
-              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
+              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
+              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
             setValues:
               environment: local
             valuesFiles:
@@ -70,10 +70,10 @@ profiles:
   - name: dev
     build:
       googleCloudBuild:
-        projectId: devstream-services
+        projectId: devstream-shared-services-4179
         gradleImage: gradle:7.6-jdk11-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-portal-api
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
             type: gradle
             project: service
@@ -87,8 +87,8 @@ profiles:
             chartPath: helm/portal-api
             # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
             setValueTemplates:
-              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
-              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
+              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
+              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
             setValues:
               environment: dev
             valuesFiles:
@@ -97,10 +97,10 @@ profiles:
   - name: staging
     build:
       googleCloudBuild:
-        projectId: devstream-services
+        projectId: devstream-shared-services-4179
         gradleImage: gradle:7.6-jdk11-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-portal-api
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
             type: gradle
             project: service
@@ -114,8 +114,8 @@ profiles:
             chartPath: helm/portal-api
             # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
             setValueTemplates:
-              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
-              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
+              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
+              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
             setValues:
               environment: staging
             valuesFiles:
@@ -124,10 +124,10 @@ profiles:
   - name: prod
     build:
       googleCloudBuild:
-        projectId: devstream-services
+        projectId: devstream-shared-services-4179
         gradleImage: gradle:7.6-jdk11-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-portal-api
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
             type: gradle
             project: service
@@ -141,8 +141,8 @@ profiles:
             chartPath: helm/portal-api
             # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
             setValueTemplates:
-              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
-              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_portal_api}}"
+              image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
+              image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_portal_api}}"
             setValues:
               environment: prod
             valuesFiles:
