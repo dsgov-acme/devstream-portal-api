@@ -7,7 +7,7 @@ profiles:
     build:
       googleCloudBuild:
         projectId: devstream-shared-services-4179
-        gradleImage: gradle:7.6-jdk11-alpine
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
         - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
@@ -71,7 +71,7 @@ profiles:
     build:
       googleCloudBuild:
         projectId: devstream-shared-services-4179
-        gradleImage: gradle:7.6-jdk11-alpine
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
         - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
@@ -98,7 +98,7 @@ profiles:
     build:
       googleCloudBuild:
         projectId: devstream-shared-services-4179
-        gradleImage: gradle:7.6-jdk11-alpine
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
         - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
@@ -125,7 +125,7 @@ profiles:
     build:
       googleCloudBuild:
         projectId: devstream-shared-services-4179
-        gradleImage: gradle:7.6-jdk11-alpine
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
         - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-portal-api
           jib:
