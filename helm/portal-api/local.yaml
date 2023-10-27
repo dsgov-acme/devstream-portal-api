@@ -1,0 +1,12 @@
+environment: "local"
+createIngress: true
+isGke: false
+
+net:
+  host: "api.devstream.test"
+
+env:
+  ALLOWED_ORIGINS: "http://localhost:4200, http://localhost:4201, http://public.devstream.test, http://agency.devstream.test"
+  CERBOS_URI: "127.0.0.1:3592"
+  GCP_PROJECT_ID: "devstream-dev"
+  OTEL_SAMPLER_PROBABILITY: 1.0 # valid values: [0.0 - 1.0]

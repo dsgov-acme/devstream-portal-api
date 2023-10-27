@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace | default "devstream" }}
+  labels:
+    {{- include "portal-api.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "portal-api.selectorLabels" . | nindent 6 }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        roll: {{ randAlphaNum 5 | quote }}
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        {{- include "portal-api.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.environment }}-{{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ENV
+              value: {{ default "dev" .Values.environment | quote }}
+            {{- include "env.tpl" .Values.env | indent 12 }}
+          ports:
+            - name: http
+              containerPort: {{ default "8080" .Values.net.applicationPort }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.net.contextPath }}{{ .Values.net.readinessProbe.path }}
+              port: {{ .Values.net.applicationPort }}
+              scheme: HTTP
+            periodSeconds: {{ .Values.net.readinessProbe.periodSeconds }}
+          resources:
+            requests:
+              cpu: {{ .Values.resources.portalService.requests.cpu }}
+              memory: {{ .Values.resources.portalService.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.portalService.limits.memory }}
+        - name: cerbos
+          image: "ghcr.io/cerbos/cerbos:0.24.0"
+          imagePullPolicy: IfNotPresent
+          args:
+            - "server"
+            - "--config=/config/config.yaml"
+            - "--log-level=INFO"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: policies
+              mountPath: /policies
+          resources:
+            requests:
+              cpu: {{ .Values.resources.cerbos.requests.cpu }}
+              memory: {{ .Values.resources.cerbos.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.cerbos.limits.memory }}
+      volumes:
+        # Shared volume containing the socket.
+        - name: config
+          configMap:
+            name: {{.Chart.Name}}-cerbos-config
+        - name: policies
+          configMap:
+            name: {{.Chart.Name}}-cerbos-policies
